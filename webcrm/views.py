@@ -48,4 +48,13 @@ def register_user(request):
 
     return render(request, 'register.html', {'form': form})
 
+def record(request, pk):
+    if request.user.is_authenticated:
+        record =Record.objects.get(id=pk)
+        return render(request, 'record.html', {'record': record})
+    else:
+        messages.error(request, 'Вы должны залогиниться')
+        return redirect('home')
+
+
 
