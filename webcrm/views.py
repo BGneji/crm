@@ -82,3 +82,20 @@ def add_record(request):
     else:
         messages.error(request, 'Вы должны залогиниться')
         return redirect('home')
+
+
+def updated_record(request, pk):
+    if request.user.is_authenticated:
+        record = Record.objects.get(id=pk)
+        # заполняем данными (instance) и подставляем вытащенный объект (record)
+        form = AddRecordForm(request.POST or None, instance=record)
+        if form.is_valid():
+            updated_record = form.save()
+            messages.success(request, f'Выша запись {updated_record.first_name} была изменена ')
+            return redirect('home')
+        return render(request, 'updated_record.html', {'form': form})
+    else:
+        messages.error(request, 'Вы должны залогиниться')
+        return redirect('home')
+
+

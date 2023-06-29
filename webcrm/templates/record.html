@@ -15,4 +15,5 @@
   </div>
 <a href="{% url 'home' %}" class="btn btn-secondary">Назад</a>
 <a href="{% url 'delete_record' record.id %}" class="btn btn-danger">Удалить</a>
+<a href="{% url 'updated_record' record.id %}" class="btn btn-success">Изменить</a>
 {% endblock content %}
